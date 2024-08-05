@@ -1,0 +1,114 @@
+@model IList<Movie>
+
+<partial name="_BreadCrumbs" model=@(new [] {
+    ("/","Home"),
+    ("","Movies")
+}) />
+
+<div class="card border rounded shadow p-4">
+
+    <!-- Title bar -->
+    <div class="d-flex align-items-center justify-content-between mb-3">
+        <h3 class="text-primary">Movie List</h3>
+        @if (User.IsInRole("admin"))
+        {
+            <a class="btn btn-sm btn-primary" asp-action="create" title="create movie" aria-label="create movie">
+                <i class="bi bi-plus"></i> Create
+            </a>
+        }
+    </div>
+
+<h3>Movie List</h3>
+
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            
+            <th>Id
+                <a class="btn btn-link p-0" asp-action="Index" asp-route-order="id"asp-route-direction="asc">
+                <i class="bi bi-caret-up"></i>
+                </a>
+
+                <a class="btn btn-link p-0" asp-action="Index" asp-route-order="id"asp-route-direction="desc">
+                <i class="bi bi-caret-down"></i>
+                </a>
+
+
+            </th>
+
+            <th>Title
+                <a class="btn btn-link p-0" asp-action="Index" asp-route-order="title"asp-route-direction="asc">
+                <i class="bi bi-caret-up"></i>
+                </a>
+
+                <a class="btn btn-link p-0" asp-action="Index" asp-route-order="title"asp-route-direction="desc">
+                <i class="bi bi-caret-down"></i>
+                </a>
+            </th>
+            <th>Director
+                <a class="btn btn-link p-0" asp-action="Index" asp-route-order="director"asp-route-direction="asc">
+                <i class="bi bi-caret-up"></i>
+                </a>
+
+                <a class="btn btn-link p-0" asp-action="Index" asp-route-order="director"asp-route-direction="desc">
+                <i class="bi bi-caret-down"></i>
+                </a>
+            </th>
+            <th>Year
+                <a class="btn btn-link p-0" asp-action="Index" asp-route-order="year"asp-route-direction="asc">
+                <i class="bi bi-caret-up"></i>
+                </a>
+
+                <a class="btn btn-link p-0" asp-action="Index" asp-route-order="year"asp-route-direction="desc">
+                <i class="bi bi-caret-down"></i>
+                </a>
+            </th>
+            <th>AgeRating
+                <a class="btn btn-link p-0" asp-action="Index" asp-route-order="age"asp-route-direction="asc">
+                <i class="bi bi-caret-up"></i>
+                </a>
+
+                <a class="btn btn-link p-0" asp-action="Index" asp-route-order="age"asp-route-direction="desc">
+                <i class="bi bi-caret-down"></i>
+                </a>
+            </th>
+            <th>RunTime
+                <a class="btn btn-link p-0" asp-action="Index" asp-route-order="runtime"asp-route-direction="asc">
+                <i class="bi bi-caret-up"></i>
+                </a>
+
+                <a class="btn btn-link p-0" asp-action="Index" asp-route-order="runtime"asp-route-direction="desc">
+                <i class="bi bi-caret-down"></i>
+                </a>
+            </th>
+            <th>Genre
+                <a class="btn btn-link p-0" asp-action="Index" asp-route-order="genre"asp-route-direction="asc">
+                <i class="bi bi-caret-up"></i>
+                </a>
+
+                <a class="btn btn-link p-0" asp-action="Index" asp-route-order="genre"asp-route-direction="desc">
+                <i class="bi bi-caret-down"></i>
+                </a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        @foreach(var m in Model) {
+            <tr>
+                <td>@m.Id</td>
+                <td>@m.Title</td>
+                <td>@m.Director</td>
+                <td>@m.Year</td>
+                <td>@m.AgeRating</td>
+                <td>@m.RunTime</td>
+                <td>@m.Genre</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@m.Id"><i class="material-icons">Information</i></a> 
+                    <a asp-action="Edit" asp-route-id="@m.Id"><i class="material-icons">Edit</i></a> 
+                    <a asp-action="Delete" asp-route-id=@m.Id><i class="material-icons">Delete</i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
